@@ -10,3 +10,4 @@ uploads/*
 !uploads/products/
 uploads/products/*
 !uploads/products/.gitkeep
+.vercel
