@@ -43,7 +43,7 @@ const VendorDashboard = () => {
       }
 
       // Fetch recent products
-      const productsResponse = await fetch('http://localhost:8000/api/vendor/products?limit=5', {
+      const productsResponse = await fetch('http://localhost:8000/api/vendors/products?limit=5', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const productsData = await productsResponse.json();

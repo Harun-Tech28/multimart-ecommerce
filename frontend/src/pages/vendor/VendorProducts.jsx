@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button';
 import Loader from '../../components/common/Loader';
+import { getImageUrl, handleImageError } from '../../utils/imageHelper';
 import Pagination from '../../components/common/Pagination';
 
 const VendorProducts = () => {
@@ -27,7 +28,7 @@ const VendorProducts = () => {
     setLoading(true);
     
     try {
-      let url = `http://localhost:8000/api/vendor/products?page=${currentPage}&limit=10`;
+      let url = `http://localhost:8000/api/vendors/products?page=${currentPage}&limit=10`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
       if (statusFilter) url += `&status=${statusFilter}`;
       
@@ -51,7 +52,7 @@ const VendorProducts = () => {
     const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
     
     try {
-      const response = await fetch(`http://localhost:8000/api/vendor/products/${productId}/status`, {
+      const response = await fetch(`http://localhost:8000/api/vendors/products/${productId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ const VendorProducts = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:8000/api/vendor/products/${productId}`, {
+      const response = await fetch(`http://localhost:8000/api/vendors/products/${productId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -189,9 +190,11 @@ const VendorProducts = () => {
                           <div className="h-16 w-16 flex-shrink-0 bg-gray-200 rounded-lg overflow-hidden">
                             {product.images?.[0] ? (
                               <img
-                                src={product.images[0]}
+                                src={getImageUrl(product.images[0])}
                                 alt={product.name}
                                 className="h-full w-full object-cover"
+                                onError={handleImageError}
+                                loading="lazy"
                               />
                             ) : (
                               <div className="h-full w-full flex items-center justify-center">

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../common/Button';
 import WishlistButton from '../common/WishlistButton';
+import { getImageUrl, handleImageError } from '../../utils/imageHelper';
 
 const ProductCard = ({ product, onAddToCart }) => {
   const { _id, name, description, price, discountPercentage, images, rating, stock } = product;
@@ -19,9 +20,11 @@ const ProductCard = ({ product, onAddToCart }) => {
         <div className="h-64 bg-gray-200 flex items-center justify-center">
           {images && images.length > 0 ? (
             <img 
-              src={images[0]} 
+              src={getImageUrl(images[0])} 
               alt={name} 
-              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" 
+              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+              onError={handleImageError}
+              loading="lazy"
             />
           ) : (
             <svg className="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

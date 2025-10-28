@@ -8,6 +8,7 @@ import ReviewList from '../components/reviews/ReviewList';
 import ReviewSummary from '../components/reviews/ReviewSummary';
 import { addToRecentlyViewed } from '../components/products/RecentlyViewed';
 import { addToComparison } from '../components/products/ProductComparison';
+import { getImageUrl, handleImageError } from '../utils/imageHelper';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -150,9 +151,11 @@ const ProductDetails = () => {
               <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden mb-4">
                 {product.images && product.images.length > 0 ? (
                   <img
-                    src={product.images[selectedImage]}
+                    src={getImageUrl(product.images[selectedImage])}
                     alt={product.name}
                     className="w-full h-full object-cover"
+                    onError={handleImageError}
+                    loading="eager"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -174,7 +177,13 @@ const ProductDetails = () => {
                         selectedImage === index ? 'border-blue-600' : 'border-gray-200'
                       }`}
                     >
-                      <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
+                      <img 
+                        src={getImageUrl(image)} 
+                        alt={`${product.name} ${index + 1}`} 
+                        className="w-full h-full object-cover"
+                        onError={handleImageError}
+                        loading="lazy"
+                      />
                     </button>
                   ))}
                 </div>

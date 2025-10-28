@@ -62,6 +62,30 @@ const productSchema = new mongoose.Schema({
       required: true
     }
   }],
+  // Product variants/options (e.g., size, color, material)
+  variants: [{
+    name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    options: [{
+      value: {
+        type: String,
+        required: true,
+        trim: true
+      },
+      priceAdjustment: {
+        type: Number,
+        default: 0
+      },
+      stock: {
+        type: Number,
+        default: 0,
+        min: 0
+      }
+    }]
+  }],
   stock: {
     type: Number,
     required: [true, 'Stock quantity is required'],
