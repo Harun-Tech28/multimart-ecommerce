@@ -34,7 +34,7 @@ function Products() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/categories');
+      const response = await fetch('http://localhost:5000/api/categories');
       const data = await response.json();
       if (data.success) {
         setCategories(data.data.categories);
@@ -47,7 +47,7 @@ function Products() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      let url = `http://localhost:8000/api/products?page=${currentPage}&limit=12`;
+      let url = `http://localhost:5000/api/products?page=${currentPage}&limit=12`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
       if (selectedCategory) url += `&category=${selectedCategory}`;
       if (sortBy) url += `&sort=${sortBy}`;
@@ -95,7 +95,7 @@ function Products() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/cart/add', {
+      const response = await fetch('http://localhost:5000/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

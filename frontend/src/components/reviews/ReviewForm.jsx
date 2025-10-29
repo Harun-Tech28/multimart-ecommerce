@@ -35,8 +35,8 @@ const ReviewForm = ({ productId, onReviewSubmitted, existingReview = null }) => 
       }
 
       const url = existingReview
-        ? `http://localhost:8000/api/reviews/${existingReview._id}`
-        : 'http://localhost:8000/api/reviews';
+        ? `http://localhost:5000/api/reviews/${existingReview._id}`
+        : 'http://localhost:5000/api/reviews';
 
       const method = existingReview ? 'PUT' : 'POST';
 

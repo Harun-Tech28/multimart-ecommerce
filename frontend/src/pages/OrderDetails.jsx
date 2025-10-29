@@ -24,7 +24,7 @@ const OrderDetails = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/api/orders/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/orders/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();

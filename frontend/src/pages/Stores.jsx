@@ -17,7 +17,7 @@ const Stores = () => {
   const fetchStores = async () => {
     setLoading(true);
     try {
-      let url = `http://localhost:8000/api/stores?page=${currentPage}&limit=12`;
+      let url = `http://localhost:5000/api/stores?page=${currentPage}&limit=12`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
       
       const response = await fetch(url);

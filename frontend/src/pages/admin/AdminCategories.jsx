@@ -25,7 +25,7 @@ const AdminCategories = () => {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/categories');
+      const response = await fetch('http://localhost:5000/api/categories');
       const data = await response.json();
       if (data.success) {
         setCategories(data.data.categories || []);
@@ -43,8 +43,8 @@ const AdminCategories = () => {
     
     try {
       const url = editingCategory
-        ? `http://localhost:8000/api/admin/categories/${editingCategory._id}`
-        : 'http://localhost:8000/api/admin/categories';
+        ? `http://localhost:5000/api/admin/categories/${editingCategory._id}`
+        : 'http://localhost:5000/api/admin/categories';
       
       const response = await fetch(url, {
         method: editingCategory ? 'PUT' : 'POST',
@@ -82,7 +82,7 @@ const AdminCategories = () => {
     
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/categories/${categoryId}`, {
+      const response = await fetch(`http://localhost:5000/api/admin/categories/${categoryId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

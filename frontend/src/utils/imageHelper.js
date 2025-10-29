@@ -12,12 +12,12 @@ export const getImageUrl = (imagePath) => {
   
   // If it starts with /uploads/, prepend the backend URL
   if (imagePath.startsWith('/uploads/')) {
-    return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}${imagePath}`;
+    return `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}${imagePath}`;
   }
   
   // If it's just a filename or relative path, assume it's in uploads
   if (!imagePath.startsWith('/')) {
-    return `${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/uploads/${imagePath}`;
+    return `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/uploads/${imagePath}`;
   }
   
   return imagePath;

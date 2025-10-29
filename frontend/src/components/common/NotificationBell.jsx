@@ -29,7 +29,7 @@ const NotificationBell = () => {
     if (!token) return;
 
     try {
-      const response = await fetch('http://localhost:8000/api/notifications', {
+      const response = await fetch('http://localhost:5000/api/notifications', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -45,7 +45,7 @@ const NotificationBell = () => {
   const markAsRead = async (notificationId) => {
     const token = localStorage.getItem('token');
     try {
-      await fetch(`http://localhost:8000/api/notifications/${notificationId}/read`, {
+      await fetch(`http://localhost:5000/api/notifications/${notificationId}/read`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -58,7 +58,7 @@ const NotificationBell = () => {
   const markAllAsRead = async () => {
     const token = localStorage.getItem('token');
     try {
-      await fetch('http://localhost:8000/api/notifications/read-all', {
+      await fetch('http://localhost:5000/api/notifications/read-all', {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` }
       });

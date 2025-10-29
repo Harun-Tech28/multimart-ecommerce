@@ -38,7 +38,7 @@ const CryptoPayment = ({ orderId, amount, currency = 'USD', onSuccess, onError }
 
   const initializePayment = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/payments/initialize', {
+      const response = await fetch('http://localhost:5000/api/payments/initialize', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const CryptoPayment = ({ orderId, amount, currency = 'USD', onSuccess, onError }
   const checkPaymentStatus = async () => {
     setChecking(true);
     try {
-      const response = await fetch('http://localhost:8000/api/payments/verify', {
+      const response = await fetch('http://localhost:5000/api/payments/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

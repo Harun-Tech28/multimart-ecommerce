@@ -37,7 +37,7 @@ const VendorStore = () => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://localhost:8000/api/vendor/store', {
+      const response = await fetch('http://localhost:5000/api/vendor/store', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -76,7 +76,7 @@ const VendorStore = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:8000/api/vendor/store', {
+      const response = await fetch('http://localhost:5000/api/vendor/store', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ const VendorOrders = () => {
     setLoading(true);
     
     try {
-      let url = `http://localhost:8000/api/vendor/orders?page=${currentPage}&limit=10`;
+      let url = `http://localhost:5000/api/vendor/orders?page=${currentPage}&limit=10`;
       if (statusFilter) url += `&status=${statusFilter}`;
       
       const response = await fetch(url, {
@@ -48,7 +48,7 @@ const VendorOrders = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:8000/api/vendor/orders/${orderId}/status`, {
+      const response = await fetch(`http://localhost:5000/api/vendor/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

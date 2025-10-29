@@ -22,7 +22,7 @@ const Cart = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/api/cart', {
+      const response = await fetch('http://localhost:5000/api/cart', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -45,7 +45,7 @@ const Cart = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:8000/api/cart/update', {
+      const response = await fetch('http://localhost:5000/api/cart/update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ const Cart = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:8000/api/cart/remove/${productId}`, {
+      const response = await fetch(`http://localhost:5000/api/cart/remove/${productId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -95,7 +95,7 @@ const Cart = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:8000/api/cart/clear', {
+      const response = await fetch('http://localhost:5000/api/cart/clear', {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

@@ -23,21 +23,21 @@ function Home() {
   const fetchHomeData = async () => {
     try {
       // Fetch featured products
-      const productsRes = await fetch('http://localhost:8000/api/products?limit=8&sort=rating');
+      const productsRes = await fetch('http://localhost:5000/api/products?limit=8&sort=rating');
       const productsData = await productsRes.json();
       if (productsData.success) {
         setFeaturedProducts(productsData.data.products || []);
       }
 
       // Fetch trending products
-      const trendingRes = await fetch('http://localhost:8000/api/products?limit=8&sort=popular');
+      const trendingRes = await fetch('http://localhost:5000/api/products?limit=8&sort=popular');
       const trendingData = await trendingRes.json();
       if (trendingData.success) {
         setTrendingProducts(trendingData.data.products || []);
       }
 
       // Fetch categories
-      const categoriesRes = await fetch('http://localhost:8000/api/categories');
+      const categoriesRes = await fetch('http://localhost:5000/api/categories');
       const categoriesData = await categoriesRes.json();
       if (categoriesData.success) {
         setCategories(categoriesData.data.categories || []);
@@ -45,7 +45,7 @@ function Home() {
 
       // Fetch platform stats (if available)
       try {
-        const statsRes = await fetch('http://localhost:8000/api/stats');
+        const statsRes = await fetch('http://localhost:5000/api/stats');
         const statsData = await statsRes.json();
         if (statsData.success) {
           setStats(statsData.data);
@@ -72,7 +72,7 @@ function Home() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/cart/add', {
+      const response = await fetch('http://localhost:5000/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

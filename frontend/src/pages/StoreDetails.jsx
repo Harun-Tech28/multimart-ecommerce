@@ -19,7 +19,7 @@ const StoreDetails = () => {
 
   const fetchStoreDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/stores/${id}`);
+      const response = await fetch(`http://localhost:5000/api/stores/${id}`);
       const data = await response.json();
       if (data.success) {
         setStore(data.data.store);
@@ -32,7 +32,7 @@ const StoreDetails = () => {
   const fetchStoreProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/stores/${id}/products?page=${currentPage}&limit=12`);
+      const response = await fetch(`http://localhost:5000/api/stores/${id}/products?page=${currentPage}&limit=12`);
       const data = await response.json();
       if (data.success) {
         setProducts(data.data.products || []);
@@ -53,7 +53,7 @@ const StoreDetails = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/cart/add', {
+      const response = await fetch('http://localhost:5000/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

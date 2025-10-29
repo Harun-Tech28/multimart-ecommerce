@@ -36,7 +36,7 @@ const Checkout = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/cart', {
+      const response = await fetch('http://localhost:5000/api/cart', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -66,7 +66,7 @@ const Checkout = () => {
 
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:8000/api/orders', {
+      const response = await fetch('http://localhost:5000/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

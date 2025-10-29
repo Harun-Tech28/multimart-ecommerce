@@ -28,7 +28,7 @@ const AdminOrders = () => {
     setLoading(true);
     
     try {
-      let url = `http://localhost:8000/api/admin/orders?page=${currentPage}&limit=10`;
+      let url = `http://localhost:5000/api/admin/orders?page=${currentPage}&limit=10`;
       if (statusFilter) url += `&status=${statusFilter}`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
       
@@ -55,7 +55,7 @@ const AdminOrders = () => {
     }
     
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/orders/${orderId}/status`, {
+      const response = await fetch(`http://localhost:5000/api/admin/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

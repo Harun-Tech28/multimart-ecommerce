@@ -26,7 +26,7 @@ const AdminProducts = () => {
     setLoading(true);
     
     try {
-      let url = `http://localhost:8000/api/admin/products?page=${currentPage}&limit=10`;
+      let url = `http://localhost:5000/api/admin/products?page=${currentPage}&limit=10`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
       
       const response = await fetch(url, {
@@ -49,7 +49,7 @@ const AdminProducts = () => {
     
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/products/${productId}`, {
+      const response = await fetch(`http://localhost:5000/api/admin/products/${productId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

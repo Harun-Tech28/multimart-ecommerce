@@ -30,7 +30,7 @@ const SearchBar = ({ onSearch, placeholder = "Search for products..." }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:8000/api/products/search?q=${encodeURIComponent(query)}&limit=5`
+          `http://localhost:5000/api/products/search?q=${encodeURIComponent(query)}&limit=5`
         );
         const data = await response.json();
         if (data.success) {

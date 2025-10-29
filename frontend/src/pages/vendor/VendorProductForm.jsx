@@ -41,7 +41,7 @@ const VendorProductForm = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/categories');
+      const response = await fetch('http://localhost:5000/api/categories');
       const data = await response.json();
       if (data.success) {
         setCategories(data.data.categories || []);
@@ -56,7 +56,7 @@ const VendorProductForm = () => {
     setLoading(true);
     
     try {
-      const response = await fetch(`http://localhost:8000/api/vendors/products/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/vendors/products/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -187,7 +187,7 @@ const VendorProductForm = () => {
         formData.append('files', file);
       });
 
-      const response = await fetch('http://localhost:8000/api/upload/product', {
+      const response = await fetch('http://localhost:5000/api/upload/product', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -198,7 +198,7 @@ const VendorProductForm = () => {
       const data = await response.json();
       
       if (data.success) {
-        const newFileUrls = data.data.files.map(url => `http://localhost:8000${url}`);
+        const newFileUrls = data.data.files.map(url => `http://localhost:5000${url}`);
         setUploadedFiles(prev => [...prev, ...newFileUrls]);
         
         // Add to form data images
@@ -224,7 +224,7 @@ const VendorProductForm = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:8000/api/upload/product', {
+      const response = await fetch('http://localhost:5000/api/upload/product', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -260,8 +260,8 @@ const VendorProductForm = () => {
     
     try {
       const url = isEditMode
-        ? `http://localhost:8000/api/vendors/products/${id}`
-        : 'http://localhost:8000/api/vendors/products';
+        ? `http://localhost:5000/api/vendors/products/${id}`
+        : 'http://localhost:5000/api/vendors/products';
       
       const response = await fetch(url, {
         method: isEditMode ? 'PUT' : 'POST',

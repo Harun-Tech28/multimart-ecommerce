@@ -25,7 +25,7 @@ const VendorDashboard = () => {
     
     try {
       // Fetch vendor stats
-      const statsResponse = await fetch('http://localhost:8000/api/vendor/stats', {
+      const statsResponse = await fetch('http://localhost:5000/api/vendor/stats', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const statsData = await statsResponse.json();
@@ -34,7 +34,7 @@ const VendorDashboard = () => {
       }
 
       // Fetch recent orders
-      const ordersResponse = await fetch('http://localhost:8000/api/vendor/orders?limit=5', {
+      const ordersResponse = await fetch('http://localhost:5000/api/vendor/orders?limit=5', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const ordersData = await ordersResponse.json();
@@ -43,7 +43,7 @@ const VendorDashboard = () => {
       }
 
       // Fetch recent products
-      const productsResponse = await fetch('http://localhost:8000/api/vendors/products?limit=5', {
+      const productsResponse = await fetch('http://localhost:5000/api/vendors/products?limit=5', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const productsData = await productsResponse.json();

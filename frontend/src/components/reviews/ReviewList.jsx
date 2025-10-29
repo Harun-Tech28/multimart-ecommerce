@@ -30,7 +30,7 @@ const ReviewList = ({ reviews = [], productId, onReviewUpdated, currentUserId })
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8000/api/reviews/${reviewId}`, {
+      const response = await fetch(`http://localhost:5000/api/reviews/${reviewId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

@@ -28,7 +28,7 @@ const AdminUsers = () => {
     setLoading(true);
     
     try {
-      let url = `http://localhost:8000/api/admin/users?page=${currentPage}&limit=10`;
+      let url = `http://localhost:5000/api/admin/users?page=${currentPage}&limit=10`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
       if (roleFilter) url += `&role=${roleFilter}`;
       if (statusFilter) url += `&status=${statusFilter}`;
@@ -57,7 +57,7 @@ const AdminUsers = () => {
     }
     
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/users/${userId}/status`, {
+      const response = await fetch(`http://localhost:5000/api/admin/users/${userId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

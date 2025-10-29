@@ -28,7 +28,7 @@ const VendorProducts = () => {
     setLoading(true);
     
     try {
-      let url = `http://localhost:8000/api/vendors/products?page=${currentPage}&limit=10`;
+      let url = `http://localhost:5000/api/vendors/products?page=${currentPage}&limit=10`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
       if (statusFilter) url += `&status=${statusFilter}`;
       
@@ -52,7 +52,7 @@ const VendorProducts = () => {
     const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
     
     try {
-      const response = await fetch(`http://localhost:8000/api/vendors/products/${productId}/status`, {
+      const response = await fetch(`http://localhost:5000/api/vendors/products/${productId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const VendorProducts = () => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:8000/api/vendors/products/${productId}`, {
+      const response = await fetch(`http://localhost:5000/api/vendors/products/${productId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

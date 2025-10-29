@@ -43,7 +43,7 @@ const ProductDetails = () => {
   const fetchReviews = async () => {
     setReviewsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/products/${id}/reviews`);
+      const response = await fetch(`http://localhost:5000/api/products/${id}/reviews`);
       const data = await response.json();
       if (data.success) {
         setReviews(data.data.reviews || []);
@@ -58,7 +58,7 @@ const ProductDetails = () => {
   const fetchProductDetails = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/products/${id}`);
+      const response = await fetch(`http://localhost:5000/api/products/${id}`);
       const data = await response.json();
       if (data.success) {
         setProduct(data.data.product);
@@ -80,7 +80,7 @@ const ProductDetails = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/cart/add', {
+      const response = await fetch('http://localhost:5000/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ const WishlistButton = ({ productId, className = '' }) => {
     if (!token) return;
 
     try {
-      const response = await fetch('http://localhost:8000/api/wishlist', {
+      const response = await fetch('http://localhost:5000/api/wishlist', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
@@ -41,8 +41,8 @@ const WishlistButton = ({ productId, className = '' }) => {
     setLoading(true);
     try {
       const url = isInWishlist 
-        ? `http://localhost:8000/api/wishlist/remove/${productId}`
-        : 'http://localhost:8000/api/wishlist/add';
+        ? `http://localhost:5000/api/wishlist/remove/${productId}`
+        : 'http://localhost:5000/api/wishlist/add';
       
       const options = {
         method: isInWishlist ? 'DELETE' : 'POST',

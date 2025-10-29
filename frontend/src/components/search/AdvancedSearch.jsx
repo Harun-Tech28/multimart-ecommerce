@@ -36,7 +36,7 @@ const AdvancedSearch = () => {
   const fetchSuggestions = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/products/search/suggestions?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`http://localhost:5000/api/products/search/suggestions?q=${encodeURIComponent(query)}`);
       const data = await response.json();
       if (data.success) {
         setSuggestions(data.data.suggestions || []);

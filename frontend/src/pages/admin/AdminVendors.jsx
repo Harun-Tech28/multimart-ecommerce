@@ -26,7 +26,7 @@ const AdminVendors = () => {
     setLoading(true);
     
     try {
-      let url = `http://localhost:8000/api/admin/vendors?page=${currentPage}&limit=10`;
+      let url = `http://localhost:5000/api/admin/vendors?page=${currentPage}&limit=10`;
       if (statusFilter) url += `&status=${statusFilter}`;
       
       const response = await fetch(url, {
@@ -52,7 +52,7 @@ const AdminVendors = () => {
     }
     
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/vendors/${vendorId}/status`, {
+      const response = await fetch(`http://localhost:5000/api/admin/vendors/${vendorId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
