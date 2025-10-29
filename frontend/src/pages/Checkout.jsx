@@ -14,6 +14,8 @@ const Checkout = () => {
   const [orderId, setOrderId] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [momoPhone, setMomoPhone] = useState('');
+  const [momoProvider, setMomoProvider] = useState('mtn');
   const [shippingAddress, setShippingAddress] = useState({
     street: '',
     city: '',
@@ -168,7 +170,7 @@ const Checkout = () => {
               {/* Payment Method Selection */}
               <div className="mb-6">
                 <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
@@ -184,6 +186,19 @@ const Checkout = () => {
                   </button>
                   <button
                     type="button"
+                    onClick={() => setPaymentMethod('momo')}
+                    className={`p-4 border-2 rounded-lg transition-all ${
+                      paymentMethod === 'momo'
+                        ? 'border-yellow-500 bg-yellow-50 shadow-md'
+                        : 'border-gray-300 hover:border-yellow-300'
+                    }`}
+                  >
+                    <div className="text-3xl mb-2">📱</div>
+                    <div className="font-semibold">Mobile Money</div>
+                    <div className="text-xs text-gray-500 mt-1">MTN, Vodafone, AirtelTigo</div>
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setPaymentMethod('crypto')}
                     className={`p-4 border-2 rounded-lg transition-all ${
                       paymentMethod === 'crypto'
@@ -196,6 +211,14 @@ const Checkout = () => {
                     <div className="text-xs text-gray-500 mt-1">BTC, ETH, USDT & more</div>
                   </button>
                 </div>
+                {paymentMethod === 'momo' && (
+                  <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <p className="text-sm text-yellow-800">
+                      <strong>📱 Quick & Easy:</strong> Pay instantly with your mobile money wallet. 
+                      Supports MTN Mobile Money, Vodafone Cash, and AirtelTigo Money.
+                    </p>
+                  </div>
+                )}
                 {paymentMethod === 'crypto' && (
                   <div className="mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
                     <p className="text-sm text-orange-800">
@@ -205,6 +228,46 @@ const Checkout = () => {
                   </div>
                 )}
               </div>
+
+              {/* Mobile Money Details */}
+              {paymentMethod === 'momo' && (
+                <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <h3 className="font-semibold mb-4">Mobile Money Details</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Select Provider *
+                      </label>
+                      <select
+                        value={momoProvider}
+                        onChange={(e) => setMomoProvider(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      >
+                        <option value="mtn">MTN Mobile Money</option>
+                        <option value="vodafone">Vodafone Cash</option>
+                        <option value="airteltigo">AirtelTigo Money</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Phone Number *
+                      </label>
+                      <input
+                        type="tel"
+                        value={momoPhone}
+                        onChange={(e) => setMomoPhone(e.target.value)}
+                        placeholder="0XX XXX XXXX"
+                        required={paymentMethod === 'momo'}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">
+                        Enter the phone number registered with your mobile money account
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <h2 className="text-xl font-semibold mb-6">Shipping Address</h2>
 
               <div className="space-y-4">
@@ -300,7 +363,10 @@ const Checkout = () => {
                   loading={processing}
                   disabled={processing}
                 >
-                  {processing ? 'Processing...' : paymentMethod === 'crypto' ? 'Continue to Crypto Payment' : 'Place Order'}
+                  {processing ? 'Processing...' : 
+                   paymentMethod === 'crypto' ? 'Continue to Crypto Payment' : 
+                   paymentMethod === 'momo' ? 'Pay with Mobile Money' : 
+                   'Place Order'}
                 </Button>
               </div>
             </form>

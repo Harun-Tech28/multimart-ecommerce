@@ -3,12 +3,14 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import Loader from '../components/common/Loader';
 import Button from '../components/common/Button';
 import OrderTracking from '../components/orders/OrderTracking';
+import OrderReceipt from '../components/orders/OrderReceipt';
 
 const OrderDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   useEffect(() => {
     fetchOrderDetails();
@@ -97,9 +99,20 @@ const OrderDetails = () => {
                 })}
               </p>
             </div>
-            <span className={`px-4 py-2 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
-              {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-            </span>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setShowReceipt(true)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                View Receipt
+              </button>
+              <span className={`px-4 py-2 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
+                {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -182,6 +195,14 @@ const OrderDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Receipt Modal */}
+      {showReceipt && (
+        <OrderReceipt 
+          order={order} 
+          onClose={() => setShowReceipt(false)} 
+        />
+      )}
     </div>
   );
 };

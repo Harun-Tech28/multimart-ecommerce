@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../components/common/Loader';
 import Pagination from '../components/common/Pagination';
+import OrderReceipt from '../components/orders/OrderReceipt';
 
 const Orders = () => {
   const navigate = useNavigate();
@@ -9,6 +10,8 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   useEffect(() => {
     fetchOrders();
@@ -127,9 +130,24 @@ const Orders = () => {
                       )}
                     </div>
 
-                    <div className="text-right">
-                      <p className="text-sm text-gray-600">{order.items.length} item(s)</p>
-                      <p className="text-lg font-bold text-gray-900">${order.totalAmount.toFixed(2)}</p>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-sm text-gray-600">{order.items.length} item(s)</p>
+                        <p className="text-lg font-bold text-gray-900">${order.totalAmount.toFixed(2)}</p>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setSelectedOrder(order);
+                          setShowReceipt(true);
+                        }}
+                        className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm flex items-center gap-1"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Receipt
+                      </button>
                     </div>
                   </div>
                 </Link>
@@ -148,6 +166,17 @@ const Orders = () => {
           </>
         )}
       </div>
+
+      {/* Receipt Modal */}
+      {showReceipt && selectedOrder && (
+        <OrderReceipt 
+          order={selectedOrder} 
+          onClose={() => {
+            setShowReceipt(false);
+            setSelectedOrder(null);
+          }} 
+        />
+      )}
     </div>
   );
 };
